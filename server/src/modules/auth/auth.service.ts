@@ -108,6 +108,7 @@ const loginUser = async (email: string, password: string) => {
   return {
     accessToken,
     user: {
+      userId: user._id.toString(),
       name: user.name,
       email: user.email,
       role: user.role,

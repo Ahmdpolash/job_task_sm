@@ -3,6 +3,7 @@ import httpStatus from "http-status";
 
 import { AuthServices } from "./auth.service";
 import catchAsync from "../../utils/catchAsync";
+import { Request, Response } from "express";
 
 // CREATE ACCOUNT
 const CreateUser = catchAsync(async (req, res) => {
@@ -72,10 +73,20 @@ const getMe = catchAsync(async (req, res) => {
   });
 });
 
+// logout
+const logOut = async (req: Request, res: Response) => {
+  res.clearCookie("accessToken");
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "User logged out successfully",
+  });
+};
+
 export const AuthController = {
   CreateUser,
   VerifyOtp,
   LoginUser,
   GetAllUsers,
   getMe,
+  logOut,
 };
