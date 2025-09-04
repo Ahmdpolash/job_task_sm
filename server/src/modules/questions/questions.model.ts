@@ -72,10 +72,6 @@ const questionSchema = new Schema<IQuestion>(
       type: String,
       trim: true,
     },
-    isActive: {
-      type: Boolean,
-      default: true,
-    },
     // createdBy: {
     //   type: Schema.Types.ObjectId,
     //   ref: "User",
@@ -86,12 +82,6 @@ const questionSchema = new Schema<IQuestion>(
     timestamps: true,
   }
 );
-
-// Indexes for better query performance
-questionSchema.index({ competency: 1, level: 1 });
-questionSchema.index({ step: 1 });
-questionSchema.index({ isActive: 1 });
-questionSchema.index({ createdBy: 1 });
 
 // Pre-save middleware to auto-calculate step based on level
 questionSchema.pre("save", function (next) {

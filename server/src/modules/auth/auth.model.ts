@@ -43,6 +43,15 @@ const UserSchema = new Schema<IUser>({
     type: Date,
     select: false,
   },
+  completedLevels: {
+    type: Number,
+    default: 0,
+  },
+  currentLevel: {
+    type: String,
+    enum: ["A1", "A2", "B1", "B2", "C1", "C2"],
+    default: "A1",
+  },
 });
 
 // hash the pass

@@ -14,4 +14,6 @@ export interface IUser {
   role: UserRole;
   otp?: string;
   otpExpiry?: Date;
+  completedLevels?: number;
+  currentLevel?: string;
 }
