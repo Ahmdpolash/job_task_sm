@@ -91,7 +91,7 @@ const deleteQuestion = async (id: string) => {
 };
 
 // get random questions for exam by step
-// Get questions for exam (random 44 questions for specific step)
+
 const getQuestionsByStep = async (step: number) => {
   const questions = await Question.aggregate([
     { $match: { step: step, isActive: true } },

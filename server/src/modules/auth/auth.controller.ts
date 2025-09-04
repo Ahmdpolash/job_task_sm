@@ -31,12 +31,18 @@ const VerifyOtp = catchAsync(async (req, res) => {
 const LoginUser = catchAsync(async (req, res) => {
   const { email, password } = req.body;
   const result = await AuthServices.loginUser(email, password);
-  const { accessToken, user } = result;
+  const { accessToken, user, refreshToken } = result;
 
   res.cookie("accessToken", accessToken, {
     httpOnly: true,
     secure: process.env.NODE_ENV === "production", // set to true in production
     maxAge: 24 * 60 * 60 * 1000, // 1 day
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  });
+  res.cookie("refreshToken", refreshToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // set to true in production
+    maxAge: 7 * 24 * 60 * 60 * 1000, // 7 days
     sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
   });
 

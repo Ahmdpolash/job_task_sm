@@ -104,9 +104,15 @@ const loginUser = async (email: string, password: string) => {
     config.jwt.secret as string,
     config.jwt.expiresIn as string
   );
+  const refreshToken = jwtHelper.generateToken(
+    tokenPayload,
+    config.jwt.refresh_secret as string,
+    config.jwt.expiresIn as string
+  );
 
   return {
     accessToken,
+    refreshToken,
     user: {
       userId: user._id.toString(),
       name: user.name,
