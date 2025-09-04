@@ -1,0 +1,81 @@
+// auth controller
+import httpStatus from "http-status";
+
+import { AuthServices } from "./auth.service";
+import catchAsync from "../../utils/catchAsync";
+
+// CREATE ACCOUNT
+const CreateUser = catchAsync(async (req, res) => {
+  const result = await AuthServices.CreateUser(req.body);
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Please check your email to verify your account",
+    data: result,
+  });
+});
+
+// VERIFY OTP
+const VerifyOtp = catchAsync(async (req, res) => {
+  const { email, otp } = req.body;
+  const result = await AuthServices.verifyOtp(email, otp);
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: result.message,
+  });
+});
+
+// login
+
+const LoginUser = catchAsync(async (req, res) => {
+  const { email, password } = req.body;
+  const result = await AuthServices.loginUser(email, password);
+  const { accessToken, user } = result;
+
+  res.cookie("accessToken", accessToken, {
+    httpOnly: true,
+    secure: process.env.NODE_ENV === "production", // set to true in production
+    maxAge: 24 * 60 * 60 * 1000, // 1 day
+    sameSite: process.env.NODE_ENV === "production" ? "none" : "lax",
+  });
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "User logged in successfully",
+    data: {
+      accessToken,
+      user,
+    },
+  });
+});
+
+// get all users
+const GetAllUsers = catchAsync(async (req, res) => {
+  const result = await AuthServices.getAllUsers();
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Users retrieved successfully",
+    data: result,
+  });
+});
+
+// get me
+const getMe = catchAsync(async (req, res) => {
+  const { userId } = req.user;
+
+  const result = await AuthServices.getMe(userId);
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "User profile fetched successfully",
+    data: result,
+  });
+});
+
+export const AuthController = {
+  CreateUser,
+  VerifyOtp,
+  LoginUser,
+  GetAllUsers,
+  getMe,
+};
