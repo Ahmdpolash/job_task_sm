@@ -60,6 +60,19 @@ const userApi = baseApi.injectEndpoints({
         credentials: "include",
       }),
     }),
+    getAllUsers: builder.query({
+      query: () => ({
+        url: "/auth/users",
+        method: "GET",
+      }),
+    }),
+
+    GetTotalCounts: builder.query({
+      query: () => ({
+        url: "/auth/totalCounts",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -69,4 +82,6 @@ export const {
   useLoginMutation,
   useGetMeQuery,
   useLogOutMutation,
+  useGetAllUsersQuery,
+  useGetTotalCountsQuery,
 } = userApi;

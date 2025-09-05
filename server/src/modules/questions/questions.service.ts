@@ -93,7 +93,7 @@ const deleteQuestion = async (id: string) => {
 // get random questions for exam by step
 
 const getQuestionsByStep = async (step: number) => {
-  const questions = await Question.find({ step, isActive: true }).sort({ createdAt: 1 });
+  const questions = await Question.find({ step }).sort({ createdAt: 1 });
 
   if (questions.length === 0) {
     throw new AppError(

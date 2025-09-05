@@ -1,4 +1,5 @@
 import { baseApi } from "@/redux/api/baseApi";
+import { tagTypes } from "@/redux/tagType";
 
 const questionApi = baseApi.injectEndpoints({
   endpoints: (builder: any) => ({
@@ -7,6 +8,7 @@ const questionApi = baseApi.injectEndpoints({
         url: "/question",
         method: "GET",
       }),
+      providesTags: [tagTypes.question],
     }),
 
     getQuestionByStep: builder.query({
@@ -15,7 +17,38 @@ const questionApi = baseApi.injectEndpoints({
         method: "GET",
       }),
     }),
+
+    deleteQuestion: builder.mutation({
+      query: (id: string) => ({
+        url: `/question/${id}`,
+        method: "DELETE",
+      }),
+      invalidatesTags: [tagTypes.question],
+    }),
+
+    updateQuestion: builder.mutation({
+      query: ({ id, data }: { id: string; data: any }) => ({
+        url: `/question/${id}`,
+        method: "PUT",
+        body: data,
+      }),
+    }),
+
+    addQuestion: builder.mutation({
+      query: (data: any) => ({
+        url: "/question",
+        method: "POST",
+        body: data,
+      }),
+      invalidatesTags: [tagTypes.question],
+    }),
   }),
 });
 
-export const { useGetQuestionsQuery, useGetQuestionByStepQuery } = questionApi;
+export const {
+  useGetQuestionsQuery,
+  useGetQuestionByStepQuery,
+  useDeleteQuestionMutation,
+  useUpdateQuestionMutation,
+  useAddQuestionMutation,
+} = questionApi;

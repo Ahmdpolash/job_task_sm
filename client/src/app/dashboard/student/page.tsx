@@ -11,6 +11,7 @@ import {
   UserCircleIcon,
   XCircleIcon,
 } from "lucide-react";
+import Link from "next/link";
 import React from "react";
 
 const UserDashboardPage = () => {
@@ -244,15 +245,19 @@ const UserDashboardPage = () => {
 
                           <div className="flex-shrink-0">
                             {step.canTake && step.status === "available" && (
-                              <button className="inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
-                                Take Exam
-                                <ArrowRightIcon className="ml-2 h-4 w-4" />
-                              </button>
+                              <Link href={"/dashboard/student/exam"}>
+                                <button className=" cursor-pointer inline-flex items-center px-4 py-2 bg-blue-600 text-white text-sm font-medium rounded-md hover:bg-blue-700 transition-colors">
+                                  Take Exam
+                                  <ArrowRightIcon className="ml-2 h-4 w-4" />
+                                </button>
+                              </Link>
                             )}
                             {step.status === "completed" && (
-                              <button className="inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
-                                View Results
-                              </button>
+                              <Link href={"/dashboard/student/results"}>
+                                <button className=" cursor-pointer inline-flex items-center px-4 py-2 bg-gray-100 text-gray-700 text-sm font-medium rounded-md hover:bg-gray-200 transition-colors">
+                                  View Results
+                                </button>
+                              </Link>
                             )}
                             {step.status === "locked" && (
                               <span className="inline-flex items-center px-3 py-2 bg-gray-100 text-gray-500 text-sm rounded-md">

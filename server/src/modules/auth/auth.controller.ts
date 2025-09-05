@@ -88,8 +88,23 @@ const logOut = async (req: Request, res: Response) => {
   });
 };
 
+// get total user count and total question count
+const GetTotalCounts = catchAsync(async (req, res) => {
+  const { totalUsers, totalQuestion } = await AuthServices.GetTotalCounts();
+
+  res.status(httpStatus.OK).json({
+    success: true,
+    message: "Total counts fetched successfully",
+    data: {
+      users: totalUsers,
+      questions: totalQuestion,
+    },
+  });
+});
+
 export const AuthController = {
   CreateUser,
+  GetTotalCounts,
   VerifyOtp,
   LoginUser,
   GetAllUsers,

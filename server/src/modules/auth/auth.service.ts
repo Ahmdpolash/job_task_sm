@@ -8,6 +8,7 @@ import bcrypt from "bcrypt";
 import config from "../../config";
 import { jwtHelper } from "../../helper/jwtHelper";
 import { sendEmail } from "../../utils/sendMail";
+import { Question } from "../questions/questions.model";
 
 // create user acc
 const CreateUser = async (payload: IUser) => {
@@ -141,10 +142,18 @@ const getMe = async (userId: string) => {
   return user;
 };
 
+const GetTotalCounts = async () => {
+  const totalUsers = await User.countDocuments();
+  const totalQuestion = await Question.countDocuments();
+
+  return { totalUsers, totalQuestion };
+};
+
 export const AuthServices = {
   CreateUser,
   verifyOtp,
   loginUser,
   getMe,
   getAllUsers,
+  GetTotalCounts,
 };

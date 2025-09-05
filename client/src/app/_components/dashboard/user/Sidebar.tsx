@@ -18,7 +18,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation"; // 👈 active path detect করার জন্য
 import { useEffect, useState } from "react";
 
-const UserSidebar = ({ role }: any) => {
+const UserSidebar = () => {
   const [logOut, { isSuccess, isLoading }] = useLogOutMutation();
   const { data } = useGetMeQuery({});
   const userInfo = data?.data;
@@ -35,7 +35,8 @@ const UserSidebar = ({ role }: any) => {
     }
   }, [isSuccess]);
 
-  const items = sidebarConfig[role] || [];
+  const items = sidebarConfig[userInfo?.role] || [];
+
 
   return (
     <div>

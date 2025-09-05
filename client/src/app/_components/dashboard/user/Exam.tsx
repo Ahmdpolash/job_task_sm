@@ -30,10 +30,14 @@ export default function ExamPage() {
   const step = Number(useSearchParams().get("step") || "1");
 
   const { data: apiResponse, isLoading } = useGetQuestionByStepQuery(step);
-  const questions: Question[] = Array.isArray(apiResponse?.data)
-    ? apiResponse.data
+  const questions: Question[] = Array.isArray((apiResponse as any)?.data)
+    ? (apiResponse as any).data
     : [];
 
+  console.log("Fetched questions:", questions);
+
+
+  //stateeeeeeeee
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedOption, setSelectedOption] = useState<
     "A" | "B" | "C" | "D" | null
@@ -158,13 +162,17 @@ export default function ExamPage() {
   };
 
   // Redirect to result page
-  const goToResultPage = () => router.push("/admin/student/result");
+  const goToResultPage = () => router.push("/dashboard/student/results");
 
   const formatTime = (seconds: number) =>
     `${Math.floor(seconds / 60)}:${(seconds % 60).toString().padStart(2, "0")}`;
 
   if (isLoading)
-    return <p className="flex h-screen items-center justify-center">Loading questions...</p>;
+    return (
+      <p className="flex h-screen items-center justify-center">
+        Loading questions...
+      </p>
+    );
   if (questions.length === 0)
     return (
       <div className="min-h-screen flex flex-col items-center justify-center">

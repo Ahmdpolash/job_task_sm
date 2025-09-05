@@ -18,4 +18,6 @@ router.get("/me", auth(), AuthController.getMe);
 
 router.post("/logout", AuthController.logOut);
 
+router.get("/totalCounts", AuthController.GetTotalCounts);
+
 export const AuthRoutes = router;

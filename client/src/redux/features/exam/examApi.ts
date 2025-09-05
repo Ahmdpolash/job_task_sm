@@ -11,6 +11,7 @@ const examApi = baseApi.injectEndpoints({
     }),
     getUserExamResults: builder.query({
       query: (userId) => `/exam/user/${userId}`,
+      
     }),
   }),
 });

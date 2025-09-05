@@ -1,4 +1,5 @@
 "use client";
+import { sidebarConfig } from "@/constant";
 import {
   ArrowRightIcon,
   BookOpenIcon,
@@ -59,14 +60,6 @@ const UserDashboard = () => {
       canTake: false,
       message: "Complete Step 2 first",
     },
-  ];
-
-  const sidebarItems = [
-    { icon: HomeIcon, name: "Dashboard", href: "/dashboard", active: true },
-    { icon: BookOpenIcon, name: "Take Exam", href: "/exam" },
-    { icon: TextIcon, name: "Certificates", href: "/certificates" },
-    { icon: TrophyIcon, name: "Results", href: "/results" },
-    { icon: CogIcon, name: "Settings", href: "/settings" },
   ];
 
   const getStepStatusColor = (status: string) => {
@@ -146,7 +139,7 @@ const UserDashboard = () => {
 
         <nav className="mt-8 px-4">
           <ul className="space-y-2">
-            {sidebarItems.map((item) => {
+            {sidebarConfig[role].map((item) => {
               const Icon = item.icon;
               return (
                 <li key={item.name}>

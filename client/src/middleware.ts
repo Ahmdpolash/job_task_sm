@@ -20,11 +20,9 @@ export const middleware = async (req: NextRequest) => {
 
   try {
     // Decode and verify token using jose
-      const secret = new TextEncoder().encode(process.env.JWT_SECRET);
-      console.log("Secret:", secret);
+    const secret = new TextEncoder().encode(process.env.JWT_SECRET);
+
     const { payload } = await jose.jwtVerify(token, secret);
-    
-    console.log("Decoded Token:", payload);
 
     const role = payload.role as "admin" | "supervisor" | "student";
 

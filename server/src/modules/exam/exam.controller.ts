@@ -41,3 +41,8 @@ export const getUserExamResultsController = async (
       .json({ success: false, message: err.message });
   }
 };
+
+export const getUserLevelAndExamCountController = async (
+  req: Request,
+  res: Response
+) => {};

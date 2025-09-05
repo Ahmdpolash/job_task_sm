@@ -2,9 +2,9 @@
 
 export interface IQuestion {
   _id?: string;
-  competency: string; // "Competency 1", "Competency 2", etc. (1-22)
+  competency: string;
   level: "A1" | "A2" | "B1" | "B2" | "C1" | "C2";
-  step: 1 | 2 | 3; // Auto-calculated based on level
+  step: 1 | 2 | 3;
   questionText: string;
   options: {
     A: string;
@@ -13,10 +13,10 @@ export interface IQuestion {
     D: string;
   };
   correctAnswer: "A" | "B" | "C" | "D";
-  difficulty: number; // 1-5
-  explanation?: string; // Optional explanation for correct answer
+  difficulty: String; // 1-5
+  explanation?: string;
   isActive: boolean;
-  createdBy?: string; // Admin user ID
+  createdBy?: string;
   createdAt?: Date;
   updatedAt?: Date;
 }

@@ -30,7 +30,7 @@ const questionSchema = new Schema<IQuestion>(
       type: String,
       required: [true, "Question text is required"],
       trim: true,
-      minlength: [10, "Question text must be at least 10 characters"],
+      
     },
     options: {
       A: {
@@ -63,10 +63,8 @@ const questionSchema = new Schema<IQuestion>(
       },
     },
     difficulty: {
-      type: Number,
+      type: String,
       required: [true, "Difficulty is required"],
-      min: [1, "Difficulty must be at least 1"],
-      max: [5, "Difficulty cannot exceed 5"],
     },
     explanation: {
       type: String,
