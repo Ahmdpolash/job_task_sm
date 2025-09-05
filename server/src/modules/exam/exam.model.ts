@@ -1,74 +1,19 @@
-import mongoose, { Schema } from "mongoose";
+import { model, Schema } from "mongoose";
 
-const examAnswerSchema = new Schema(
-  {
-    questionId: {
-      type: Schema.Types.ObjectId,
-      ref: "Question",
-      required: true,
-    },
-    selectedAnswer: {
-      type: String,
-      enum: ["A", "B", "C", "D"],
-      required: true,
-    },
-    isCorrect: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { _id: false }
-);
+type Answer = {
+  questionId: string;
+  selectedAnswer: "A" | "B" | "C" | "D";
+  timeSpent: number; // seconds
+};
 
-const examSchema = new Schema(
-  {
-    userId: {
-      type: Schema.Types.ObjectId,
-      ref: "User",
-      required: true,
-    },
-    step: {
-      type: Number,
-      enum: [1, 2, 3],
-      required: true,
-    },
-    questions: [
-      {
-        type: Schema.Types.ObjectId,
-        ref: "Question",
-        required: true,
-      },
-    ],
-    answers: [examAnswerSchema],
+const ExamResultSchema = new Schema({
+  userId: { type: Schema.Types.ObjectId, ref: "User", required: true },
+  step: { type: Number, required: true },
+  level: { type: String, enum: ["A1","A2","B1","B2","C1","C2"], required: true },
+  score: { type: Number, required: true },
+  passed: { type: Boolean, default: false },
+  answers: { type: [Object], default: [] as Answer[] },
+  completedAt: { type: Date, default: Date.now }
+});
 
-    score: {
-      type: Number,
-      min: 0,
-    },
-    totalQuestions: {
-      type: Number,
-      default: 44,
-    },
-    correctAnswers: {
-      type: Number,
-      default: 0,
-    },
-
-    status: {
-      type: String,
-      enum: ["in-progress", "completed", "expired"],
-      default: "in-progress",
-    },
-    levelAchieved: {
-      type: String,
-      enum: ["A1", "A2", "B1", "B2", "C1", "C2"],
-    },
-    canProceedToNext: {
-      type: Boolean,
-      default: false,
-    },
-  },
-  { timestamps: true }
-);
-
-export const Exam = mongoose.model("Exam", examSchema);
+export const ExamResult = model("ExamResult", ExamResultSchema);

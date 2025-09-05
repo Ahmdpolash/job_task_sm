@@ -114,7 +114,7 @@ const UserSidebar = ({ role }: any) => {
           </div>
           <button
             onClick={handleLogout}
-            className="mt-2 cursor-pointer flex items-center w-full px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-100"
+            className="mt-2 cursor-pointer border bg-red-600 flex items-center w-full px-3 py-2 text-sm text-white rounded-md  "
           >
             <ArrowRightIcon className="mr-3 h-4 w-4" />
             {isLoading ? "Logging out..." : "Logout"}
