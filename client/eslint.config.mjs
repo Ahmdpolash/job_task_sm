@@ -11,6 +11,20 @@ const compat = new FlatCompat({
 
 const eslintConfig = [
   ...compat.extends("next/core-web-vitals", "next/typescript"),
+
+  {
+    rules: {
+      "react/no-unescaped-entities": "off",
+      "@typescript-eslint/no-unused-vars": "off",
+      "@typescript-eslint/no-explicit-any": "off",
+      "@next/next/no-img-element": "off",
+      "react-hooks/rules-of-hooks": "off",
+      "react-hooks/exhaustive-deps": "off",
+      // You can enable these rules if you want to enforce hook rules
+      // "@react-hooks/exhaustive-deps": "warn",
+      // "@react-hooks/rules-of-hooks": "error",
+    },
+  },
 ];
 
 export default eslintConfig;

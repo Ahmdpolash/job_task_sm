@@ -33,7 +33,27 @@ import { Input } from "@/components/ui/input";
 import { getDifficultyColor, getLevelColor } from "@/app/utils";
 
 const TestPage = () => {
-  const { data, isLoading } = useGetQuestionsQuery({});
+  type Question = {
+    _id: string;
+    competency: string;
+    level: string;
+    difficulty: string;
+    questionText: string;
+    options: { A: string; B: string; C: string; D: string };
+    correctAnswer: string;
+    updatedAt: string;
+  };
+
+  type QuestionsResponse = {
+    data: Question[];
+  };
+
+  const { data, isLoading } = useGetQuestionsQuery({}, {
+    selectFromResult: ({ data, ...rest }) => ({
+      data: data as QuestionsResponse | undefined,
+      ...rest,
+    }),
+  });
   const [deleteQuestion, { isSuccess }] = useDeleteQuestionMutation();
   const [updateQuestion, { isSuccess: isUpdateSuccess }] =
     useUpdateQuestionMutation();

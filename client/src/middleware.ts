@@ -2,16 +2,16 @@
 import { NextRequest, NextResponse } from "next/server";
 import * as jose from "jose";
 
-const PUBLIC_PATHS = ["/login", "/register"];
+// const PUBLIC_PATHS = ["/login", "/register"];
 
 export const middleware = async (req: NextRequest) => {
   const token = req.cookies.get("accessToken")?.value;
   const { pathname } = req.nextUrl;
 
   // Public routes: anyone can access
-  if (PUBLIC_PATHS.includes(pathname) || pathname === "/") {
-    return NextResponse.next();
-  }
+  // if (PUBLIC_PATHS.includes(pathname) || pathname === "/") {
+  //   return NextResponse.next();
+  // }
 
   // If no token -> redirect to login
   if (!token) {

@@ -1,3 +1,5 @@
+"use client";
+import { useGetMeQuery } from "@/redux/features/auth/authApi";
 import {
   ArrowRightIcon,
   BookOpenIcon,
@@ -15,6 +17,11 @@ import Link from "next/link";
 import React from "react";
 
 const UserDashboardPage = () => {
+  const { data: me } = useGetMeQuery({});
+  const myData = me?.data;
+
+
+  
   const examProgress = [
     {
       step: 1,
@@ -90,7 +97,7 @@ const UserDashboardPage = () => {
         {/* Header */}
         <div className="mb-6 bg-white p-5 rounded-lg shadow-sm border">
           <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
-            Welcome back, {user.name}!
+            Welcome back, {myData?.name}!
           </h1>
           <p className="mt-2 text-gray-600">
             Track your digital competency progress and take assessments.
