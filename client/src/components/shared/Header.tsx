@@ -11,7 +11,7 @@ const Header = () => {
   console.log(data);
 
   return (
-    <div>
+    <div className="bg-grid-pattern"> 
       {/* Header */}
       <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-5xl px-4">
         <div className="bg-white rounded-full shadow-lg border border-gray-300 px-6 py-3 flex items-center justify-between">
@@ -51,7 +51,7 @@ const Header = () => {
           <div className="flex items-center gap-3">
             {data?.data ? (
               <>
-                <span className="text-sm font-medium text-gray-700">
+                <span className="hidden lg:block text-sm font-medium text-gray-700">
                   Welcome, {data?.data?.name}
                 </span>
                 <Link href="/dashboard">
