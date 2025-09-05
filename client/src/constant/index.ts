@@ -13,10 +13,10 @@ export const sidebarConfig: Record<
   { name: string; href: string; icon: any }[]
 > = {
   student: [
-    { name: "Dashboard", href: "/dashboard/user", icon: HomeIcon },
-    { name: "Take Exam", href: "/dashboard/user/exam", icon: BookOpenIcon },
-    { name: "Results", href: "/dashboard/user/results", icon: TrophyIcon },
-    { name: "Settings", href: "/dashboard/user/settings", icon: CogIcon },
+    { name: "Dashboard", href: "/dashboard/student", icon: HomeIcon },
+    { name: "Take Exam", href: "/dashboard/student/exam", icon: BookOpenIcon },
+    { name: "Results", href: "/dashboard/student/results", icon: TrophyIcon },
+    { name: "Certificates", href: "/dashboard/student/certificates", icon: CogIcon },
   ],
   admin: [
     { name: "Dashboard", href: "/dashboard/admin", icon: HomeIcon },

@@ -74,7 +74,6 @@ const getQuestionsByStep = catchAsync(async (req: Request, res: Response) => {
     data: result,
   });
 });
-
 export const QuestionControllers = {
   createQuestion,
   getAllQuestions,

@@ -93,10 +93,7 @@ const deleteQuestion = async (id: string) => {
 // get random questions for exam by step
 
 const getQuestionsByStep = async (step: number) => {
-  const questions = await Question.aggregate([
-    { $match: { step: step, isActive: true } },
-    { $sample: { size: 44 } }, // Get 44 random questions
-  ]);
+  const questions = await Question.find({ step, isActive: true }).sort({ createdAt: 1 });
 
   if (questions.length === 0) {
     throw new AppError(
