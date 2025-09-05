@@ -2,6 +2,10 @@
 
 import { sidebarConfig } from "@/constant";
 import {
+  useGetMeQuery,
+  useLogOutMutation,
+} from "@/redux/features/auth/authApi";
+import {
   ArrowRightIcon,
   BookOpenIcon,
   CheckCircleIcon,
@@ -12,11 +16,24 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation"; // 👈 active path detect করার জন্য
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const UserSidebar = ({ role }: any) => {
+  const [logOut, { isSuccess, isLoading }] = useLogOutMutation();
+  const { data } = useGetMeQuery({});
+  const userInfo = data?.data;
   const [sidebarOpen, setSidebarOpen] = useState(false);
-  const pathname = usePathname(); // 👈 current route
+  const pathname = usePathname();
+
+  const handleLogout = async () => {
+    await logOut({});
+  };
+
+  useEffect(() => {
+    if (isSuccess) {
+      window.location.href = "/";
+    }
+  }, [isSuccess]);
 
   const items = sidebarConfig[role] || [];
 
@@ -89,13 +106,18 @@ const UserSidebar = ({ role }: any) => {
           <div className="flex items-center">
             <UserCircleIcon className="h-8 w-8 text-gray-400" />
             <div className="ml-3">
-              <p className="text-sm font-medium text-gray-900">polash</p>
-              <p className="text-xs text-gray-500">polash@example.com</p>
+              <p className="text-sm font-medium text-gray-900">
+                {userInfo?.name}
+              </p>
+              <p className="text-xs text-gray-500">{userInfo?.email}</p>
             </div>
           </div>
-          <button className="mt-2 flex items-center w-full px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-100">
+          <button
+            onClick={handleLogout}
+            className="mt-2 cursor-pointer flex items-center w-full px-3 py-2 text-sm text-gray-700 rounded-md hover:bg-gray-100"
+          >
             <ArrowRightIcon className="mr-3 h-4 w-4" />
-            Sign out
+            {isLoading ? "Logging out..." : "Logout"}
           </button>
         </div>
       </div>
@@ -109,10 +131,16 @@ const UserSidebar = ({ role }: any) => {
           >
             <LucideMenu className="h-5 w-5" />
           </button>
-          <div className="flex items-center">
-            <BookOpenIcon className="h-6 w-6 text-blue-600" />
-            <span className="ml-2 text-lg font-semibold">Test School</span>
-          </div>
+          <Link
+            href="/"
+            className="cursor-pointer flex items-center justify-center"
+            prefetch={false}
+          >
+            <Shapes className="h-6 w-6 text-primary-600" />
+            <span className="ml-2 text-xl font-bold text-gray-900">
+              ECompetence
+            </span>
+          </Link>
         </div>
       </div>
     </div>

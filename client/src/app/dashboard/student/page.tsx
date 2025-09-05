@@ -85,9 +85,9 @@ const UserDashboardPage = () => {
   return (
     <div className="flex-1 w-full">
       {/* Page content */}
-      <main className="p-4 lg:p-8">
+      <main className="">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-6 bg-white p-5 rounded-lg shadow-sm border">
           <h1 className="text-2xl lg:text-3xl font-bold text-gray-900">
             Welcome back, {user.name}!
           </h1>

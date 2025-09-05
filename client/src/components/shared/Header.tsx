@@ -8,10 +8,10 @@ import { useGetMeQuery } from "@/redux/features/auth/authApi";
 const Header = () => {
   const { data, isLoading } = useGetMeQuery({});
 
-  console.log(data);
+ 
 
   return (
-    <div className="bg-grid-pattern"> 
+    <div className="bg-grid-pattern">
       {/* Header */}
       <header className="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 w-full max-w-5xl px-4">
         <div className="bg-white rounded-full shadow-lg border border-gray-300 px-6 py-3 flex items-center justify-between">
@@ -54,7 +54,7 @@ const Header = () => {
                 <span className="hidden lg:block text-sm font-medium text-gray-700">
                   Welcome, {data?.data?.name}
                 </span>
-                <Link href="/dashboard">
+                <Link href={`/dashboard/${data?.data?.role}`}>
                   <Button className="cursor-pointer text-sm bg-[#7C4DFF] text-white hover:bg-primary-700 rounded-full px-4 py-2 font-medium shadow-lg">
                     Dashboard <ArrowRight className="ml-2 h-4 w-4" />
                   </Button>

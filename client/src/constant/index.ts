@@ -12,7 +12,7 @@ export const sidebarConfig: Record<
   string,
   { name: string; href: string; icon: any }[]
 > = {
-  user: [
+  student: [
     { name: "Dashboard", href: "/dashboard/user", icon: HomeIcon },
     { name: "Take Exam", href: "/dashboard/user/exam", icon: BookOpenIcon },
     { name: "Results", href: "/dashboard/user/results", icon: TrophyIcon },

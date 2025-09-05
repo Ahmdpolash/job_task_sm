@@ -16,4 +16,5 @@ export interface IUser {
   otpExpiry?: Date;
   completedLevels?: number;
   currentLevel?: string;
+  totalExams?: number;
 }

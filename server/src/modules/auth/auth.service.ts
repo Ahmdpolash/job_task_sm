@@ -19,7 +19,6 @@ const CreateUser = async (payload: IUser) => {
 
   //generate otp
 
-  // const otp = Math.floor(100000 + Math.random() * 900000).toString();
   // 4digit otp
   const otp = Math.floor(1000 + Math.random() * 9000).toString();
   const otpExpiry = new Date(Date.now() + 10 * 60 * 1000); // OTP valid for 10 minutes
@@ -99,6 +98,7 @@ const loginUser = async (email: string, password: string) => {
     userId: user._id.toString(),
     email: user.email,
     name: user.name,
+    role: user.role,
   };
 
   const accessToken = jwtHelper.generateToken(

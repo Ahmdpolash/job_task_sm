@@ -44,16 +44,29 @@ const Login = () => {
 
   //guest login
 
-  const handleGuestLogin = async (e: React.FormEvent) => {
-    e.preventDefault();
-    const guestData = { email: "johndoe@gmail.com", password: "john" };
-    setForm(guestData);
+  // const handleGuestLogin = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+  //   const guestData = { email: "johndoe@gmail.com", password: "john" };
+  //   setForm(guestData);
+
+  //   try {
+  //     await login(guestData).unwrap();
+  //   } catch (error: any) {
+  //     console.error("Login failed:", error);
+  //     toast.error(error.data.message);
+  //   }
+  // };
+
+  // dynamic guest login handler
+  const handleRoleLogin = async (email: string, password: string) => {
+    const roleData = { email, password };
+    setForm(roleData);
 
     try {
-      await login(guestData).unwrap();
+      await login(roleData).unwrap();
     } catch (error: any) {
       console.error("Login failed:", error);
-      toast.error(error.data.message);
+      toast.error(error.data?.message || "Login failed");
     }
   };
 
@@ -132,21 +145,21 @@ const Login = () => {
             <div className="flex gap-2 w-full justify-center items-center">
               <button
                 type="button"
-                onClick={handleGuestLogin}
+                onClick={() => handleRoleLogin("ahmedpolash732@gmail.com", "123456")}
                 className="w-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 py-2 rounded-lg font-semibold border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
               >
                 Admin{" "}
               </button>
               <button
                 type="button"
-                onClick={handleGuestLogin}
+                onClick={() => handleRoleLogin("supervisor@gmail.com", "supervisor123")}
                 className="w-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 py-2 rounded-lg font-semibold border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
               >
                 Supervisor
               </button>
               <button
                 type="button"
-                onClick={handleGuestLogin}
+                onClick={() => handleRoleLogin("student@gmail.com", "student123")}
                 className="w-full bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-200 py-2 rounded-lg font-semibold border border-gray-300 dark:border-gray-600 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
               >
                 Student

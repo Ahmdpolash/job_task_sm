@@ -34,11 +34,11 @@ export default function DashboardLayout({
 }: {
   children: React.ReactNode;
 }) {
-  // Role আসবে auth theke (Clerk/NextAuth/session)
-  const role = "user"; // example: dynamically fetch
+  
+  const role = "student";
 
   return (
-    <div className="min-h-screen bg-gray-100 flex">
+    <div className="min-h-screen bg-gray-100 flex lg:flex-row flex-col">
       <UserSidebar role={role} />
       <main className="flex-1 lg:ml-64 p-4">{children}</main>
     </div>
